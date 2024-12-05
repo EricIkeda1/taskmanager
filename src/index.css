@@ -94,15 +94,17 @@ h1 {
 }
 
 /* Estilo das tarefas (cartões) */
+
+/* Estilo das tarefas (cartões) */
 .tasks {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 20px; /* Aumentar o espaçamento entre os cartões */
 }
 
 .task {
-  background-color: #fff;
-  padding: 20px;
+  background-color: #f4f4f4;
+  padding: 30px; /* Aumentar o padding interno para tornar o cartão maior */
   border-radius: 12px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   display: flex;
@@ -111,7 +113,11 @@ h1 {
   cursor: grab;
   position: relative;
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
-  font-size: 1rem;
+  font-size: 1.2rem; /* Aumentar o tamanho da fonte */
+}
+
+.task.dragging {
+  background-color: #e0e0e0; /* Cor quando a tarefa está sendo arrastada */
 }
 
 .task:hover {
@@ -119,17 +125,31 @@ h1 {
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
 }
 
+/* Ajustar a largura das colunas */
+.column {
+  background-color: #fff;
+  padding: 20px;
+  width: 32%; /* Aumentar a largura da coluna para permitir mais espaço para os cartões */
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Ajustar o título das tarefas */
 .task .task-title {
-  font-size: 1.2rem;
+  font-size: 1.4rem; 
   color: #2c3e50; 
   font-weight: 600;
 }
 
+/* Ajustar a descrição das tarefas */
 .task .task-description {
-  font-size: 1rem;
+  font-size: 1.1rem;
   color: #7f8c8d; 
   margin-top: 8px;
 }
+
 
 /* Menu de 3 pontinhos */
 .menu {

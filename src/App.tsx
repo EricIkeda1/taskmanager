@@ -19,11 +19,17 @@ const App: React.FC = () => {
   const [showMenu, setShowMenu] = useState<string | null>(null);
   const [editedTask, setEditedTask] = useState<string>("");  
   const [taskToEdit, setTaskToEdit] = useState<string | null>(null);
+  const [draggingTaskId, setDraggingTaskId] = useState<string | null>(null);
 
   const menuRef = useRef<HTMLDivElement | null>(null);
 
   const handleDragStart = (e: React.DragEvent<HTMLDivElement>, id: string) => {
+    setDraggingTaskId(id); // Inicia o estado de arraste
     e.dataTransfer.setData("text", id);
+  };
+
+  const handleDragEnd = () => {
+    setDraggingTaskId(null); // Finaliza o estado de arraste
   };
 
   const handleDrop = (e: React.DragEvent<HTMLDivElement>, newStatus: string) => {
@@ -34,6 +40,7 @@ const App: React.FC = () => {
         task.id === id ? { ...task, status: newStatus } : task
       )
     );
+    setDraggingTaskId(null); // Finaliza o estado de arraste após o drop
   };
 
   const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
@@ -88,9 +95,10 @@ const App: React.FC = () => {
       .map(task => (
         <div
           key={task.id}
-          className="task"
+          className={`task ${draggingTaskId === task.id ? 'dragging' : ''}`}
           draggable
           onDragStart={e => handleDragStart(e, task.id)}
+          onDragEnd={handleDragEnd} // Finaliza o estado de arraste
         >
           {task.content}
           <div className="menu" onClick={() => handleMenuClick(task.id)}>
@@ -116,6 +124,7 @@ const App: React.FC = () => {
           placeholder="Nova tarefa..."
           value={newTask}
           onChange={e => setNewTask(e.target.value)}
+          onKeyDown={(e) => e.key === 'Enter' && addTask()} // Adiciona tarefa ao pressionar Enter
         />
         <button className="add-task-btn" onClick={addTask}>
           Adicionar Tarefa
