@@ -78,7 +78,7 @@ const App: React.FC = () => {
         )
       );
       setTaskToEdit(null);
-      setEditedTask("");  // Limpar o campo após salvar
+      setEditedTask("");  
     }
   };
 
